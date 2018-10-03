@@ -17,7 +17,7 @@
 
 (defn- unpack-input
   [x]
-  [x])
+  [(js->clj x :keywordize-keys true)])
 
 (defn- pack-output
   [x]

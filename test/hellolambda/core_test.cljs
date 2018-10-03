@@ -12,8 +12,7 @@
   [s]
   (js->clj (.parse js/JSON s) :keywordize-keys true))
 
-(def ^{:dynamic true}
-  result)
+(def ^{:dynamic true} result)
 
 (defn ^{:private true :dynamic true}
   capture
@@ -24,7 +23,7 @@
 (deftest test:polite?
   (binding [result (atom nil)]
     (is (= "hello, lambda"
-           (let [res (jsonstr-> (main {:name "lambda"}
+           (let [res (jsonstr-> (main (clj->js {:name "lambda"})
                                       (->AwsLambdaContext 1)
                                       capture))]
              (:result (second @result)))))))
