@@ -1,3 +1,4 @@
 
 {:require [hellolambda.core]
- :aws-lambda/handler hellolambda.core/main}
+ :boot-aws-lambda-kit/handler {:fn hellolambda.core/main :as handler}
+ :compiler-options {:target :nodejs}}
