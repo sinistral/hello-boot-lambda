@@ -23,6 +23,13 @@
   [x]
   (-> x (clj->js) (->jsonstr)))
 
+(defn- respond
+  [result callback]
+  (println result)
+  (if (:succeeded? result)
+    (callback nil (pack-output (:result result)))
+    (callback (:result result) nil)))
+
 ;;; ----------------------------------------------------------------------- ;;;
 
 (defn- λ
@@ -31,14 +38,13 @@
 
 (defn ^{:export true} main
   [event context callback]
-  (let [result (-> {:available-execution-time
-                    {:quantity (.getRemainingTimeInMillis context) :units "ms"}
-                    :began-at
-                    (.toISOString (js/Date.))}
-                   (merge (wrap-invocation #(apply λ (unpack-input event))))
-                   (assoc :ended-at (.toISOString (js/Date.))))]
-    (if (:succeeded? result)
-      (callback nil result)
-      (callback result nil))))
+  (-> {:available-execution-time
+       {:quantity (.getRemainingTimeInMillis context) :units "ms"}
+       :began-at
+       (.toISOString (js/Date.))}
+      (merge (wrap-invocation #(apply λ (unpack-input event))))
+      (assoc :ended-at (.toISOString (js/Date.)))
+      (respond callback))
+  200)
 
 (set! *main-cli-fn* identity)

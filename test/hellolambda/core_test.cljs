@@ -22,8 +22,8 @@
 
 (deftest test:polite?
   (binding [result (atom nil)]
-    (is (= "hello, lambda"
-           (let [res (jsonstr-> (main (clj->js {:name "lambda"})
-                                      (->AwsLambdaContext 1)
-                                      capture))]
-             (:result (second @result)))))))
+    (let [ret (main (clj->js {:name "lambda"})
+                    (->AwsLambdaContext 1)
+                    capture)]
+      (is (= "hello, lambda" (jsonstr-> (second @result))))
+      (is (= 200 ret)))))
