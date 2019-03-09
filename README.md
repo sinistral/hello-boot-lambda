@@ -1,4 +1,4 @@
-# hello [lambda][aws lambda]
+# Hello, ([Boot]) [lambda][aws lambda]
 
 A minimal "hello, world" project using [AWS Lambda], [ClojureScript]
 and [Boot].  It illustrates the barest minimum needed to produce a `.zip`
@@ -20,13 +20,13 @@ In the configuration for the AWS Lambda function, the **Handler** should be
 defined as `hellolambda.handler`.  The function can be tested from the AWS
 Lambda console using input data of the form: `{"name":"lambda"}`.
 
-Copyright © 2016 Marc Daya
+## License
 
-Distributed under the Eclipse Public License either version 1.0 or (at your
-option) any later version.
+Published under the [2-clause BSD license][license].
 
 [clojurescript]: http://clojure.org/about/clojurescript
 [aws lambda]:    https://aws.amazon.com/lambda/
 [boot]:          http://boot-clj.com
 [cljs-lambda]:   https://github.com/nervous-systems/cljs-lambda
 [lein]:          http://leiningen.org
+[license]:       https://opensource.org/licenses/BSD-2-Clause
